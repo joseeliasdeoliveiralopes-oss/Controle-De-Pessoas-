@@ -1,0 +1,50 @@
+lista = []
+homem_mais_velho = {"nome": "", "idade": 0}
+mulher_mais_velha = {"nome": "", "idade": 0}
+
+while True:
+    disc = {}  # novo dicionário para cada pessoa
+
+    nome = input('Name: ')
+    disc["nome"] = nome
+
+    # Validação do sexo
+    while True:
+        sexo = input('Your sex M/H? ').strip().upper()
+        if sexo in ["H", "M"]:
+            disc["sexo"] = "masculino" if sexo == "H" else "feminino"
+            break
+        else:
+            print('ERROR! Try again... Only "M" or "H" are allowed.')
+
+    idade = int(input('Qual é sua idade? '))
+    disc["idade"] = idade
+    disc['somatudo'] = idade * 2 / 2  # basicamente repete a idade
+
+    # Verifica se é o homem mais velho
+    if sexo == "H" and idade > homem_mais_velho["idade"]:
+        homem_mais_velho["nome"] = nome
+        homem_mais_velho["idade"] = idade
+
+    # Verifica se é a mulher mais velha
+    if sexo == "M" and idade > mulher_mais_velha["idade"]:
+        mulher_mais_velha["nome"] = nome
+        mulher_mais_velha["idade"] = idade
+
+    lista.append(disc)
+
+    question = input('Quer continuar S/N ?: ').strip().upper()
+    if question == "N":
+        break
+    elif question != "S":
+        print('ERROR! Pergunta feita novamente...')
+
+# Resultado final
+print("\nLista de cadastros:")
+for pessoa in lista:
+    print(pessoa)
+
+print('-=' * 30)
+
+print(f'O homem mais velho é {homem_mais_velho["nome"]} com {homem_mais_velho["idade"]} anos.')
+print(f'A mulher mais velha é {mulher_mais_velha["nome"]} com {mulher_mais_velha["idade"]} anos.')
